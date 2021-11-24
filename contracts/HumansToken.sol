@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Humans Token AG
-pragma solidity ^0.8.10;
+pragma solidity 0.8.10;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20SnapshotUpgradeable.sol";
@@ -44,8 +44,6 @@ contract HumansToken is Initializable, ERC20Upgradeable, ERC20SnapshotUpgradeabl
   function TriggerTokenGenerationEvent() public onlyOwner {
     require(!_tgeInitialized, "Humans Token: Token Generation Event already triggered!");
     _initialize_tged();
-    uint256 publicSaleTGEAmount = PublicSale_TGE_Unlock();
-    _mint(Wallets.PUBLIC_SALE_WALLET, publicSaleTGEAmount);
   }
 
   // Public Sale Unlock functions
@@ -64,13 +62,6 @@ contract HumansToken is Initializable, ERC20Upgradeable, ERC20SnapshotUpgradeabl
   }
 
   // Comunity Incentives & Rewards Unlock functions
-  function ComunityIncentiveAndRewards_TGE_Unlock() public onlyOwner returns (uint256 amount) {
-    require(COMUNITY_INCENTIVES_AND_REWARDS_SCHEDULE[0].Claimed == false, "Unlock Schedule: The token generation event amount for the comunity incentive and rewards wallet has already been claimed!");
-    amount = COMUNITY_INCENTIVES_AND_REWARDS_SCHEDULE[0].Amount;
-    emit ScheduleUnlock("Comunity Incentive and Rewards Schedule - token generation event", COMUNITY_INCENTIVES_AND_REWARDS_SCHEDULE[0].Amount, 0, block.timestamp);
-    _mint(Wallets.COMUNITY_INCENTIVES_AND_REWARDS_WALLET, amount);
-  }
-
   function TriggerComunityIncentivesAndRewardsScheduledUnlock() public onlyOwner {
     require(_tgeInitialized, "Humans Token: Token Generation Event was not triggered!");
     uint256 amount = _comunity_incentives_and_rewards_scheduled_unlock();
@@ -79,13 +70,6 @@ contract HumansToken is Initializable, ERC20Upgradeable, ERC20SnapshotUpgradeabl
   }
 
   // Private Sale functions
-  function Private_Sale_TGE_Unlock() public onlyOwner returns (uint256 amount) {
-    require(PRIVATE_SALE_SCHEDULE[0].Claimed == false, "Unlock Schedule: The token generation event amount for the private sale wallet has already been claimed!");
-    amount = PRIVATE_SALE_SCHEDULE[0].Amount;
-    emit ScheduleUnlock("Private Sale Schedule - token generation event", PRIVATE_SALE_SCHEDULE[0].Amount, 0, block.timestamp);
-    _mint(Wallets.PRIVATE_SALE_WALLET, amount);
-  }
-
   function TriggerPrivateSaleScheduledUnlock() public onlyOwner {
     require(_tgeInitialized, "Humans Token: Token Generation Event was not triggered!");
     uint256 amount = _privateSale_scheduled_unlock();
@@ -94,13 +78,6 @@ contract HumansToken is Initializable, ERC20Upgradeable, ERC20SnapshotUpgradeabl
   }
 
   // Team functions
-  function Team_TGE_Unlock() public onlyOwner returns (uint256 amount) {
-    require(TEAM_SCHEDULE[0].Claimed == false, "Unlock Schedule: The token generation event amount for the team wallet has already been claimed!");
-    amount = TEAM_SCHEDULE[0].Amount;
-    emit ScheduleUnlock("Team Schedule - token generation event", TEAM_SCHEDULE[0].Amount, 0, block.timestamp);
-    _mint(Wallets.TEAM_WALLET, amount);
-  }
-
   function TriggerTeamScheduledUnlock() public onlyOwner {
     require(_tgeInitialized, "Humans Token: Token Generation Event was not triggered!");
     uint256 amount = _team_scheduled_unlock();
@@ -124,13 +101,6 @@ contract HumansToken is Initializable, ERC20Upgradeable, ERC20SnapshotUpgradeabl
   }
 
   // Advisors and Strategic partners functions
-  function AdvisorsAndStrategicPartners_TGE_Unlock() public onlyOwner returns (uint256 amount) {
-    require(ADVISORS_AND_STRATEGIC_PARTNERS_SCHEDULE[0].Claimed == false, "Unlock Schedule: The token generation event amount for the advisors and strategic partners wallet has already been claimed!");
-    amount = ADVISORS_AND_STRATEGIC_PARTNERS_SCHEDULE[0].Amount;
-    emit ScheduleUnlock("Advisors and Strategic Partners Schedule - token generation event", ADVISORS_AND_STRATEGIC_PARTNERS_SCHEDULE[0].Amount, 0, block.timestamp);
-    _mint(Wallets.ADVISORS_AND_STRATEGIC_PARTNERS_WALLET, amount);
-  }
-
   function TriggerAdvisorsAndStrategicPartnersScheduledUnlock() public onlyOwner {
     require(_tgeInitialized, "Humans Token: Token Generation Event was not triggered!");
     uint256 amount = _advisors_and_strategic_partners_scheduled_unlock();
@@ -139,13 +109,6 @@ contract HumansToken is Initializable, ERC20Upgradeable, ERC20SnapshotUpgradeabl
   }
 
   // Strategic OTC functions
-  function StrategicOTC_TGE_Unlock() public onlyOwner returns (uint256 amount) {
-    require(STRATEGIC_OTC_SCHEDULE[0].Claimed == false, "Unlock Schedule: The token generation event amount for the strategic otc wallet has already been claimed!");
-    amount = STRATEGIC_OTC_SCHEDULE[0].Amount;
-    emit ScheduleUnlock("Strategic OTC Schedule - token generation event", STRATEGIC_OTC_SCHEDULE[0].Amount, 0, block.timestamp);
-    _mint(Wallets.STRATEGIC_OTC_WALLET, amount);
-  }
-
   function TriggerStrategicOTCScheduledUnlock() public onlyOwner {
     require(_tgeInitialized, "Humans Token: Token Generation Event was not triggered!");
     uint256 amount = _strategic_scheduled_unlock();
@@ -164,7 +127,7 @@ contract HumansToken is Initializable, ERC20Upgradeable, ERC20SnapshotUpgradeabl
   function TriggerLiquidityExchangeAndListingScheduledUnlock() public onlyOwner {
     require(_tgeInitialized, "Humans Token: Token Generation Event was not triggered!");
     uint256 amount = _liquidity_and_exchange_listings_scheduled_unlock();
-    require(amount > 0, "Humans Token: nothing to unlock from the liquidity exxchange and listings wallet schedule!");
+    require(amount > 0, "Humans Token: nothing to unlock from the liquidity exchange and listings wallet schedule!");
     _mint(Wallets.LIQUIDITY_AND_EXCHANGE_LISTING_WALLET, amount);
   }
 
@@ -188,6 +151,7 @@ contract HumansToken is Initializable, ERC20Upgradeable, ERC20SnapshotUpgradeabl
     require(BUSINESS_DEVELOPMENT_SCHEDULE[0].Claimed == false, "Unlock Schedule: The token generation event amount for the business development wallet has already been claimed!");
     amount = BUSINESS_DEVELOPMENT_SCHEDULE[0].Amount;
     emit ScheduleUnlock("Sustainable Schedule - token generation event", BUSINESS_DEVELOPMENT_SCHEDULE[0].Amount, 0, block.timestamp);
+    _mint(Wallets.BUSINESS_DEVELOPMENT_WALLET, amount);
   }
 
   function TriggerBusinessDevelopmentScheduledUnlock() public onlyOwner {
