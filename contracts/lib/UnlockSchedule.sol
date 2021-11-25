@@ -35,9 +35,8 @@ contract UnlockSchedule {
     _tgeInitialized = true;
 
     //public sale wallet schedule
-    PUBLIC_SALE_SCHEDULE[0] = UnlockInformation({Amount: 39000000000000000000000000, Claimed: false}); // Token Generation Event
-    PUBLIC_SALE_SCHEDULE[1] = UnlockInformation({Amount: 19500000000000000000000000, Claimed: false}); // Month 1
-    PUBLIC_SALE_SCHEDULE[2] = UnlockInformation({Amount: 19500000000000000000000000, Claimed: false}); // Month 2
+    PUBLIC_SALE_SCHEDULE[0] = UnlockInformation({Amount: 26000000000000000000000000, Claimed: false}); // Token Generation Event
+    PUBLIC_SALE_SCHEDULE[3] = UnlockInformation({Amount: 52000000000000000000000000, Claimed: false}); // Month 1
 
     //Community Incentives & Rewards wallet schedule
     COMUNITY_INCENTIVES_AND_REWARDS_SCHEDULE[6] = UnlockInformation({Amount: 58500000000000000000000000, Claimed: false}); // Month 6
