@@ -84,7 +84,7 @@ contract UnlockSchedule {
     ADVISORS_AND_STRATEGIC_PARTNERS_SCHEDULE[25] = UnlockInformation({Amount: 5.85e25 wei, Claimed: false}); // Month 25
     ADVISORS_AND_STRATEGIC_PARTNERS_SCHEDULE[31] = UnlockInformation({Amount: 5.85e25 wei, Claimed: false}); // Month 31
     ADVISORS_AND_STRATEGIC_PARTNERS_SCHEDULE[37] = UnlockInformation({Amount: 5.85e25 wei, Claimed: false}); // Month 37
-    ADVISORS_AND_STRATEGIC_PARTNERS_SCHEDULE[42] = UnlockInformation({Amount: 5.85e25 wei, Claimed: false}); // Month 42
+    ADVISORS_AND_STRATEGIC_PARTNERS_SCHEDULE[43] = UnlockInformation({Amount: 5.85e25 wei, Claimed: false}); // Month 43
     ADVISORS_AND_STRATEGIC_PARTNERS_SCHEDULE[49] = UnlockInformation({Amount: 7.8e25 wei, Claimed: false}); // Month 49
 
     //Strategic OTC wallet schedule
